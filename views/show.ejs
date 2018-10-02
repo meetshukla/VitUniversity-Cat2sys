@@ -1,0 +1,62 @@
+<% include partials/header %>
+<body style="background:#7395ae;">
+<nav>
+    <div class="nav-wrapper" class="sidenav-trigger"style="background:#b1a296;">
+      <a href="#" class="brand-logo right">Swapy Swap</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li ><a href="/books/new">Add New Books</a></li>
+        <li><a href="/books">View Books</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo" style="background:#b1a296;">
+    <li ><a href="/books/new">Add New Books</a></li>
+        <li><a href="/books">View Books</a></li>
+  </ul>
+<div class="container">
+<h1 class="white-text">List of all the books available!!</h1>
+
+<% books.forEach(function(book){%>
+<div class="row" class="col s12 m12 l12">
+    <div class="col s12 m12">
+      <div class="flip-container" ontouchstart="this.classList.toggle('click');">
+	 <div class="flipper">
+            <div class="front" class="col s12 m12 l12">			
+              
+               
+                      <div class="card" style="background:#5d5c61;">
+                        <div class="card-content white-text">
+                          <span class="card-title"><%=book.name%></span>
+                          <strong>Course Code:</strong><span><%=book.coursecode%></span><br>
+                          <strong>Owner:</strong><span><%=book.owner%></span><br>
+                          <strong>Slot:</strong><span><%=book.slot%></span><br>
+                        </div>
+                      </div>
+                
+                
+            </div>
+        <div class="back" class="col s12 m12 l12">			
+              
+                
+                      <div class="card" style="background:#5d5c61;">
+                        <div class="card-content white-text">
+                          <span class="card-title">Owner Info</span>
+                          <strong>Owner:</strong><span><%=book.owner%></span><br>
+                          <strong>Phone:</strong><span><%=book.phone%></span><br>
+                          <strong><a href="https://api.whatsapp.com/send?phone=+91<%=book.phone%>&text=Hi I found your book <%=book.name%> Please can you give me in slot">WhatsApp Me Here!</a></strong><br>
+                        </div>
+                      </div>
+              
+                
+            </div>
+	</div>
+	</div>
+<% }) %>
+
+
+ </div>
+  </div>
+</div>
+<% include partials/footer %>
