@@ -2,52 +2,44 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Swapy</title>
-  <style>
-               /* entire container, keeps perspective */
-                .flip-container {
-                    perspective: 1000px;
-                }
-                    /* flip the pane when hovered */
-                .flip-container:hover .flipper, .flip-container.hover .flipper {
-                        transform: rotateY(180deg);
-                    }
-                .flip-container, .front, .back {
-                    width:300px;
-                    height: 200px;
-                }
-                /* flip speed goes here */
-                .flipper {
-                    transition: 0.6s;
-                    transform-style: preserve-3d;
-                    position: relative;
-                }
-                /* hide back of pane during swap */
-                .front, .back {
-                    backface-visibility: hidden;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                }
-                /* front pane, placed above back */
-                .front {
-                    z-index: 2;
-                    /* for firefox 31 */
-                    transform: rotateY(0deg);
-                }
-                /* back, initially hidden pane */
-                .back {
-                    transform: rotateY(180deg);
-                }
-        </style>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- CSS  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+    
+    <nav>
+    <div class="nav-wrapper" class="sidenav-trigger"style="background:#b1a296;">
+        <a href="#" class="brand-logo right">Swapy Swap</a>
+      <ul class="left hide-on-med-and-down">
+        <li ><a href="/books/new">Add New Books</a></li>
+        <li><a href="/books">View Books</a></li>
+        <% if(!currentUser){ %>
+        <li ><a href="/login">Login</a></li>
+        <li><a href="/register">Sign Up</a></li>
+        <% }else{ %>
+        <li><a href="/logout">Logout</a></li>
+        <% } %>
+      </ul>
+      <ul id="slide-out" class="sidenav">
+         
+    <li ><a href="/books/new">Add New Books</a></li>
+        <li><a href="/books">View Books</a></li>
+        <% if(!currentUser){ %>
+        <li ><a href="/login">Login</a></li>
+        <li><a href="/register">Sign Up</a></li>
+        <% }else{ %>
+        <li><a href="/logout">Logout</a></li>
+        <% } %>
+  </ul>
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  
 
-        
+        </head>
         
  

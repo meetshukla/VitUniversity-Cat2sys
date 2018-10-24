@@ -1,55 +1,82 @@
 <% include partials/header %>
 <body style="background:#7395ae;">
 
-  <nav>
-    <div class="nav-wrapper" class="sidenav-trigger"style="background:#b1a296;">
-      <a href="#" class="brand-logo right">Swapy Swap</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li ><a href="/books/new">Add New Books</a></li>
-        <li><a href="/books">View Books</a></li>
-      </ul>
-    </div>
-  </nav>
+  
 
   <ul class="sidenav" id="mobile-demo" style="background:#b1a296;">
     <li ><a href="/books/new">Add New Books</a></li>
         <li><a href="/books">View Books</a></li>
   </ul>
-<div class="container" align="center">
+<div class="container">
 <h1>Add New Book</h1>
+<div class="center-align">
 <div class="row">
-    <form action="/books" method="Post" class="col s12">
+    <form action="/books" method="Post" class="col s12 m12 l6 center" onsubmit="return validate()">
       <div class="row">
-        <div class="input-field col s6 ">
-          <input type="text" class="validate" name="coursecode" placeholder="Enter Course Code" required >
+        <div class="input-field col s12 l6 ">
+          <input type="text" class="validate" name="coursecode" placeholder="Enter Course Code" id="coursecode" required >
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 l6 ">
           <input  type="text" class="validate" name="name" placeholder="Enter Name of the BOOK" required>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 l6">
           <input  type="text" class="validate" name="owner" placeholder="Enter name of the Owner" required>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 l6">
           
-          <input type="number" class="validate" name="phone" placeholder="Enter Your Phone Number" required>
+          <input type="number" class="validate" name="phone" id="ph_no" placeholder="Enter Your Phone Number" required>
         </div>
       </div>
      <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 l6">
           
-          <input type="text" class="validate" name="slot" placeholder="Enter The Slot in which you have exam" required>
+          <input type="text" class="validate" name="slot" id="slot" placeholder="Enter The Slot in which you have exam" required>
         </div>
       </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+      <div class="left-align">
+      <button class="btn waves-effect waves-light" type="submit" name="action" id="submit">Submit
     <i class="material-icons right">send</i>
   </button>
+  </div>
+  </div>
     </form>
 </div>
+<script>
+  console.log("1");
+  
+  function validate(){
+    var course_code = document.getElementById("coursecode").value.toUpperCase();
+    var phone_num = document.getElementById("ph_no").value;
+    var slot = document.getElementById("slot").value.toUpperCase();
+    var phoneno = /^\d{10}$/;    
+    var courseRegex = /[A-Z][A-Z][A-Z][0-9][0-9][0-9][0-9]/g;
+    var s1=["A1","A2","B1","B2","C1","C2","D1","D2","E1","E2","F1","F2","G1","G2"];
+    if (s1.indexOf(slot) > -1)
+    { 
+      
+    }
+    else{
+      alert("Enter Correct SLOT");
+    }
+    if(!phone_num.match(phoneno))
+    {
+      alert("Enter correct phone number");
+    }
+    if (!course_code.match(courseRegex))
+    {
+      alert("Enter Proper Course Code");
+    }
+  
+    
+    
+  }
+
+  
+</script>
 <% include partials/footer %>

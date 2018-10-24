@@ -1,0 +1,89 @@
+
+
+
+<% include partials/header %>
+<br>
+<div class="ui main text container segment" align="center">
+    <div class="ui top attached">
+        <div class="container">
+            <div class="row">
+                 <h2>Accepted Invites</h2>
+             <% invites.forEach(function(invite){ %>
+            
+               
+            <% if (invite.person==user.username){ %>
+            <% if (invite.flag){ %>
+            <div class="col s12 m12 l12">
+            <div class="card" style="background:#5d5c61;">
+            <div class="card-content white-text center">
+            <span class="card-title">
+            
+                You are taking<br> <strong><%=invite.book%></strong> in <strong>
+                    <%=invite.slotreq%>
+                SLOT
+                </strong> 
+            </span>
+              
+            </div>
+        </div>
+        </div>
+            <% } %>
+            <% } %>
+            <% }) %>
+                
+                
+                
+            <h2>Pending Invites</h2>
+            <% invites.forEach(function(invite){ %>
+            <p>
+                <% if (invite.person==user.username){ %>
+                <% if (!invite.flag && !invite.rejectflag){ %>
+            <div class="col s12 m12 l12">
+            <div class="card" style="background:#5d5c61;">
+            <div class="card-content white-text center">
+            <span class="card-title">
+                Your invite for<br> <strong><%=invite.book%></strong> in <strong>
+                    <%=invite.slotreq%>
+                SLOT is PENDING
+                </strong> 
+            </span>
+            </div>
+            </div>
+            </div>
+           <% } %> 
+            <% } %>
+                <% }) %>
+                
+                <!---->
+                <h2>Rejected Invites</h2>
+                <% invites.forEach(function(invite){ %>
+                <% if (invite.person==user.username){ %>
+                <% if (invite.rejectflag){ %>
+           <div class="col s12 m12 l12">
+            <div class="card" style="background:#5d5c61;">
+            <div class="card-content white-text center">
+            <span class="card-title">
+                Your invite for <br>
+                <strong><%=invite.book%></strong>
+                in
+                <strong>
+                    <%=invite.slotreq%>
+                    SLOT
+                </strong>
+                has been REJECTED.
+                <br>
+            </span>
+            </div>
+            </div>
+            </div>
+            
+           <% } %> 
+            <% } %>
+                
+                <% }) %>
+                
+                </div>
+            </div>
+            </div>
+            </div>
+<% include partials/footer %>

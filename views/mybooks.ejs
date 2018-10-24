@@ -1,0 +1,26 @@
+<% include partials/header %>
+<br><br><br>
+<div class="ui main text container segment" align="center">
+    <div class="ui huge header center"><%=user.name%></div>
+    <div class="ui top attached">
+        <div class="container">
+            <% user.books.forEach(function(books){ %>
+            <div class="card" style="background:#5d5c61;">
+            <div class="card-content white-text center">
+            <p> 
+                <strong>
+                    <span class="card-title"><%=books.name%></span>
+                    <a href="mybooks/<%=books._id%>">View My Invites</a>
+                </strong>
+            </p>
+            </div>
+            </div>
+            <% }) %>
+        
+        </div>
+    </div>
+    </div>
+</div>
+
+<% include partials/footer %>
+

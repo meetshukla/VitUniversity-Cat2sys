@@ -1,0 +1,24 @@
+<% include partials/header %>
+<body>
+    <div class="container">
+    <div class="input-field col s12">
+<form action="/books/<%=book._id%>" method="POST">
+    <div class="input-field col s12">
+    <select class="browser-default" name="slotreq"> 
+    <% var length=book.savl.length %> 
+    <% var i=0;%>
+    <% while (i<length) { %> 
+    <option value="<%=book.savl[i] %>" > <%= book.savl[i]%> </option> 
+    <% i=i+1 %> <% } %> 
+    </select>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+    
+</form>
+
+</body>
+<% include partials/footer %>
+
+

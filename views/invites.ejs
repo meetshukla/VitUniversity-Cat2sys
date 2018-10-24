@@ -1,0 +1,78 @@
+<% include partials/header %>
+<br>
+<div class="ui main text container segment" align="center">
+    <div class="ui top attached">
+        <div class="container">
+            <h3><%=book.name%></h3><br>
+            <div class="row">
+            <h4>Pending Invites</h4>
+            <% book.invites.forEach(function(invite){ %>
+            <p>
+                
+                <% if(!invite.flag && !invite.rejectflag){ %> 
+                <div class="card" style="background:#5d5c61;">
+                <div class="card-content white-text center">
+                <h6>
+                <strong><%=invite.person%></strong>
+                wants this book in 
+                <strong>
+                    <%=invite.slotreq%>
+                </strong>
+                SLOT <br>
+                </h6>
+                <br>
+                <form action="/accept/<%=book._id%>/<%=invite._id %>" method="POST">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Accept
+                <i class="material-icons right">send</i>
+                </button>
+                </form><br>
+                <form action="/reject/<%=book._id%>/<%=invite._id %>" method="POST">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Reject
+                <i class="material-icons right">send</i>
+                </button>
+                </form>
+                </div></div>
+                <% } %>
+                <% }) %>
+                
+                <!---->
+                <h4>Accepted Invites</h4>
+                <% book.invites.forEach(function(invite){ %>
+                <p>
+                <% if(invite.flag){ %> 
+                <div class="card" style="background:#5d5c61;">
+                <div class="card-content white-text center">
+                <h6>
+                <strong><%=invite.person%></strong>
+                is taking this book in 
+                <strong>
+                    <%=invite.slotreq%>
+                </strong>
+                SLOT <br>
+                </h6>
+                </div></div>
+                <% } %>
+                <% }) %>
+                
+                <!---->
+                <h4>Rejected Invites</h4>
+                <% book.invites.forEach(function(invite){ %>
+            <p>
+                <% if(!invite.flag && invite.rejectflag==true){ %>
+                <div class="card" style="background:#5d5c61;">
+                <div class="card-content white-text center">
+                
+                <strong>
+                    <%=invite.slotreq%>
+                </strong><br>
+                <strong><%=invite.person%></strong><br>
+                </div>
+                </div>
+                <% } %>
+                <% }) %>
+                
+                </div>
+            </div>
+            </div>
+            </div>
+<% include partials/footer %>
