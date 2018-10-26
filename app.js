@@ -7,10 +7,11 @@ var passport=require("passport")
 var LocalStrategy=require("passport-local")
 var User=require("./models/user")
 var Invite=require("./models/invite")
+var flash=require("connect-flash")
 
 
-//mongoose.connect('mongodb://localhost:27017/booksys', { useNewUrlParser: true });
-mongoose.connect('mongodb://meetshukla:jayambe22@ds241133.mlab.com:41133/cat2booksys', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/booksys', { useNewUrlParser: true });
+//mongoose.connect('mongodb://meetshukla:jayambe22@ds241133.mlab.com:41133/cat2booksys', { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
@@ -21,7 +22,7 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
-
+app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -32,8 +33,10 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req,res,next){
     res.locals.currentUser=req.user;
+    res.locals.message=req.flash("message");
     next();
 })
+
 
 
 
@@ -79,7 +82,6 @@ app.post("/books",isLoggedIn,function(req,res){
     {
         var flag=1;
     }
-    console.log(flag);
     var index = s1.indexOf(slot);
     if (index > -1) {
      s1.splice(index, 1);
@@ -213,7 +215,7 @@ app.post("/accept/:id1/:id2",function(req, res) {
             book.save()
         }
     })
-            res.redirect("https://web-dev-meetshukla.c9users.io/books");
+            res.redirect("/books");
         }
     })
 })
@@ -251,8 +253,8 @@ app.post("/register",function(req, res) {
     var newUser= new User({username:req.body.username});
     User.register(newUser,req.body.password,function(err,user){
         if(err){
-            console.log(err);
-            return res.render("register");
+        req.flash("message", err.message);
+        return res.redirect("/register");
         }
         passport.authenticate("local")(req,res,function(){
             res.redirect("/books");
@@ -267,13 +269,14 @@ app.get("/login",function(req, res) {
 app.post("/login",passport.authenticate("local",
 {
     successRedirect:"/books",
-    failureRedirect:"/login"
+    failureRedirect:"/login",
 }),
 function(req, res) {
 });
 
 app.get("/logout",function(req, res) {
     req.logout();
+    req.flash("message","Succefully Logged Out!!");
     res.redirect("/");
 })
 
@@ -281,6 +284,7 @@ function isLoggedIn(req,res,next) {
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("message","Please Login First!!");
     res.redirect("/login");
 }
 

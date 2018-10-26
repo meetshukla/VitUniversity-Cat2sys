@@ -14,29 +14,31 @@
     <form action="/books" method="Post" class="col s12 m12 l6 center" onsubmit="return validate()">
       <div class="row">
         <div class="input-field col s12 l6 ">
-          <input type="text" class="validate" name="coursecode" placeholder="Enter Course Code" id="coursecode" required >
+          <input type="text" class="validate" name="coursecode" placeholder="Enter Course Code" id="coursecode" >
+          <p id="message1"></p>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 l6 ">
-          <input  type="text" class="validate" name="name" placeholder="Enter Name of the BOOK" required>
+          <input  type="text" class="validate" name="name" placeholder="Enter Name of the BOOK">
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 l6">
-          <input  type="text" class="validate" name="owner" placeholder="Enter name of the Owner" required>
+          <input  type="text" class="validate" name="owner" placeholder="Enter name of the Owner">
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 l6">
-          
-          <input type="number" class="validate" name="phone" id="ph_no" placeholder="Enter Your Phone Number" required>
+          <input type="number" class="validate" name="phone" id="ph_no" placeholder="Enter Your Phone Number" >
+          <p id="message2"></p>
         </div>
       </div>
      <div class="row">
         <div class="input-field col s12 l6">
           
-          <input type="text" class="validate" name="slot" id="slot" placeholder="Enter The Slot in which you have exam" required>
+          <input type="text" class="validate" name="slot" id="slot" placeholder="Enter The Slot in which you have exam">
+          <p id="message3"></p>
         </div>
       </div>
       <div class="left-align">
@@ -57,24 +59,32 @@
     var phoneno = /^\d{10}$/;    
     var courseRegex = /[A-Z][A-Z][A-Z][0-9][0-9][0-9][0-9]/g;
     var s1=["A1","A2","B1","B2","C1","C2","D1","D2","E1","E2","F1","F2","G1","G2"];
+    var p1= document.getElementById("message1");
+    var p2= document.getElementById("message2");
+    var p3= document.getElementById("message3");
+    var flag=0
     if (s1.indexOf(slot) > -1)
     { 
       
     }
     else{
-      alert("Enter Correct SLOT");
+      flag
+      p1.textContent += "Please Enter Correct SLOT";
+      flag=1;
     }
     if(!phone_num.match(phoneno))
     {
-      alert("Enter correct phone number");
+      p2.textContent += "Please Enter correct phone numbe";
+      flag=1;
     }
     if (!course_code.match(courseRegex))
     {
-      alert("Enter Proper Course Code");
+      p3.textContent += "Please Enter Proper Course Code";
+      flag=1;
     }
-  
-    
-    
+    if(flag==1){
+      return false;
+    }
   }
 
   
