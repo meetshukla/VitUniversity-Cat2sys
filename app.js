@@ -240,7 +240,7 @@ app.post("/reject/:id1/:id2",function(req, res) {
             book.save()
         }
     })
-            res.redirect("https://web-dev-meetshukla.c9users.io/books");
+            res.redirect("/books");
         }
     })
 })
@@ -250,7 +250,7 @@ app.get("/register",function(req, res) {
 })
 
 app.post("/register",function(req, res) {
-    var newUser= new User({username:req.body.username});
+    var newUser= new User({username:req.body.username.toLowerCase()});
     User.register(newUser,req.body.password,function(err,user){
         if(err){
         req.flash("message", err.message);
