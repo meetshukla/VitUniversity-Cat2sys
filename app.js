@@ -10,8 +10,8 @@ var Invite=require("./models/invite")
 var flash=require("connect-flash")
 
 
-mongoose.connect('mongodb://localhost:27017/booksys', { useNewUrlParser: true });
-//mongoose.connect('mongodb://meetshukla:jayambe22@ds241133.mlab.com:41133/cat2booksys', { useNewUrlParser: true });
+//mongoose.connect('mongodb://localhost:27017/booksys', { useNewUrlParser: true });
+mongoose.connect('mongodb://meetshukla:jayambe22@ds241133.mlab.com:41133/cat2booksys', { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
